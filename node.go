@@ -222,6 +222,7 @@ func (n *Node) SetFromString(h string, openRune rune, closeRune rune, tagRune ru
 				text = append(text, prevCh)
 			}
 			if i == len(runes)-1 {
+				text = append(text, prevCh)
 				text = append(text, ch)
 
 				node := &Node{
