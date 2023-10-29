@@ -2,8 +2,6 @@ package main
 
 import (
 	"testing"
-	"fmt"
-	"os"
 )
 
 func TestGetRaw(t *testing.T) {
@@ -33,15 +31,55 @@ func TestProcessRawTags(t *testing.T) {
 }
 
 func TestProcessForTags(t *testing.T) {
+	testNode2.ProcessForTags("{%", "%}", testWebsite2, testGenerator2)
+	s := testNode2.GetRaw("{%", "%}")
+	if s != "Post: {{ post.title }}{%if post.description%}Description: {{ post.description }}{%endif%}--Post: {{ post.title }}{%if post.description%}Description: {{ post.description }}{%endif%}--" {
+		t.Fatalf("ProcessForTags failed to process 'for' tag")
+	}
 }
 
 func TestProcessIfTags(t *testing.T) {
+	siteVars := map[string]string{
+		"title": "SiteTitle",
+	}
+	pageVars := map[string]string{
+		"title": "PageTitle",
+	}
+
+	testNode3.ProcessIfTags(siteVars, pageVars)
+	s := testNode3.GetRaw("{%", "%}")
+	if s != "TestIf!PageTitle!TestIfAgain!SiteTitle!" {
+		t.Fatalf("ProcessIfTags failed to process pages and sites in 'if' tags")
+	}
+
+	testNode2.ProcessIfTags(siteVars, pageVars)
+	s = testNode2.GetRaw("{%", "%}")
+	if s != "Post: {{ post.title }}Description: {{ post.description }}--Post: {{ post.title }}--" {
+		t.Fatalf("ProcessForTags failed to process posts in 'if' tags")
+	}
 }
 
 func TestProcessPostVars(t *testing.T) {
+	testNode2.ProcessPostVars()
+	s := testNode2.GetRaw("{%", "%}")
+	if s != "Post: Title1Description: Description1--Post: Title2--" {
+		t.Fatalf("ProcessPostVars failed to process post values")
+	}	
 }
 
 func TestGetNodeAttachedValue(t *testing.T) {
+	testNode2b.ProcessForTags("{%", "%}", testWebsite2, testGenerator2)
+	t1 := testNode2b.Children[0].Children[0].Children[1].Children[0].GetNodeAttachedValue("post", "title")
+	t2 := testNode2b.Children[0].Children[1].Children[1].Children[0].GetNodeAttachedValue("post", "title")
+	d1 := testNode2b.Children[0].Children[0].Children[1].Children[0].GetNodeAttachedValue("post", "description")
+	d2 := testNode2b.Children[0].Children[1].Children[1].Children[0].GetNodeAttachedValue("post", "description")
+	if t1 != "Title1" ||
+		t2 != "Title2" ||
+		d1 != "Description1" ||
+		d2 != "" {
+
+		t.Fatalf("GetNodeAttachedValue failed to get attached value")
+	}
 }
 
 func TestSetFromString(t *testing.T) {
