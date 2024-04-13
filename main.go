@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	gocli "github.com/bitsnops/go-broccli"
+	gocli "github.com/nicholasgasior/go-broccli"
 	"os"
 )
 

@@ -1,10 +1,10 @@
 # spidey
 Tiny static website generator
 
-Spidey is a tiny tool that generates static website from HTML and markdown snippets.  The generated 
-website can contain pages as well as posts.  HTML code is defined by layouts and snippets, such as 
-header, footer or list of posts etc.  Pages and posts can be written in either pure HTML or markdown.
-These guys are glued together to form a static websites.
+Spidey is a tool designed to create static websites from HTML and Markdown snippets.  The tool
+enables the construction of websites that include both pages and posts.  It utilizes predefined layouts
+and snippets—like headers, footers, and post lists—to structure content.  You can write pages and posts
+in either pure HTML or Markdown, which Spidey then seamlessly assembles into a complete static website.
 
 Have a butcher's at `src` and `dist` in the `examples` directory to see it in action.
 
