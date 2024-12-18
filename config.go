@@ -1,21 +1,21 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"os"
-	"errors"
 )
 
 type Config struct {
-	Title string `yaml:"title"`
-	Subtitle string `yaml:"subtitle"`
-	Email string `yaml:"email"`
-	Description string `yaml:"description"`
-	Baseurl string `yaml:"baseurl"`
-	Url string `yaml:"url"`
-	GithubUsername string `yaml:"github_username"`
-	Custom map[string]string `yaml:"custom"`
+	Title          string            `yaml:"title"`
+	Subtitle       string            `yaml:"subtitle"`
+	Email          string            `yaml:"email"`
+	Description    string            `yaml:"description"`
+	Baseurl        string            `yaml:"baseurl"`
+	Url            string            `yaml:"url"`
+	GithubUsername string            `yaml:"github_username"`
+	Custom         map[string]string `yaml:"custom"`
 }
 
 func (c *Config) SetFromFile(p string) error {

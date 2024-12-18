@@ -1,15 +1,15 @@
 package main
 
 import (
-	"os"
 	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 )
 
 type Layout struct {
-	Name string
-	Body string
+	Name        string
+	Body        string
 	ContentType string
 }
 
