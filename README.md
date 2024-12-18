@@ -1,4 +1,6 @@
 # spidey
+[![Go Reference](https://pkg.go.dev/badge/github.com/mikolajgs/spidey.svg)](https://pkg.go.dev/github.com/mikolajgs/spidey) [![Go Report Card](https://goreportcard.com/badge/github.com/mikolajgs/spidey)](https://goreportcard.com/report/github.com/mikolajgs/spidey) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mikolajgs/spidey?sort=semver)
+
 Tiny static website generator
 
 Spidey is a tool designed to create static websites from HTML and Markdown snippets.  The tool

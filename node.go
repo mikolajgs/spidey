@@ -3,16 +3,16 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 	"regexp"
+	"strings"
 )
 
 type Node struct {
-	Type string
-	Content string
+	Type     string
+	Content  string
 	Children []*Node
-	Parent *Node
-	Values map[string]map[string]string
+	Parent   *Node
+	Values   map[string]map[string]string
 }
 
 func (n *Node) ProcessRawTags(tagPrefix string, tagSuffix string) {
@@ -64,8 +64,8 @@ func (n *Node) ProcessForTags(tagPrefix string, tagSuffix string, w *Website, g 
 
 		newChildren := []*Node{}
 		for _, post := range w.Posts {
-			childNode := &Node {
-				Type: "group",
+			childNode := &Node{
+				Type:   "group",
 				Values: map[string]map[string]string{},
 			}
 			childNode.Values["post"] = g.getObjVariablesFromYamlTag(post)
@@ -171,7 +171,7 @@ func (n *Node) SetFromString(h string, openRune rune, closeRune rune, tagRune ru
 			prevPrevCh = prevCh
 			prevCh = ch
 			continue
-		} 
+		}
 
 		if ch == closeRune && prevCh == tagRune && tagStarted {
 			tagStarted = false
@@ -179,25 +179,25 @@ func (n *Node) SetFromString(h string, openRune rune, closeRune rune, tagRune ru
 			tagName := n.getTagName(tagContents, openRune, closeRune, tagRune)
 			if tagName == "if" || tagName == "for" || tagName == "raw" {
 				node1 := &Node{
-					Type: "text",
+					Type:    "text",
 					Content: string(text),
-					Parent: lastNode,
+					Parent:  lastNode,
 				}
 				lastNode.Children = append(lastNode.Children, node1)
 				node2 := &Node{
-					Type: tagName,
-					Content: tagContents,
+					Type:     tagName,
+					Content:  tagContents,
 					Children: []*Node{},
-					Parent: lastNode,
+					Parent:   lastNode,
 				}
 				lastNode.Children = append(lastNode.Children, node2)
 				lastNode = node2
 			}
 			if tagName == "endif" || tagName == "endfor" || tagName == "endraw" {
 				node := &Node{
-					Type: "text",
+					Type:    "text",
 					Content: string(text),
-					Parent: lastNode,
+					Parent:  lastNode,
 				}
 				lastNode.Children = append(lastNode.Children, node)
 				lastNode = lastNode.Parent
@@ -226,9 +226,9 @@ func (n *Node) SetFromString(h string, openRune rune, closeRune rune, tagRune ru
 				text = append(text, ch)
 
 				node := &Node{
-					Type: "text",
+					Type:    "text",
 					Content: string(text),
-					Parent: lastNode,
+					Parent:  lastNode,
 				}
 				lastNode.Children = append(lastNode.Children, node)
 			}
@@ -260,7 +260,7 @@ func (n *Node) Debug(depth int) {
 	fmt.Fprintf(os.Stdout, "\n")
 	if len(n.Children) > 0 {
 		for _, c := range n.Children {
-			c.Debug(depth+1)
+			c.Debug(depth + 1)
 		}
 	}
 }

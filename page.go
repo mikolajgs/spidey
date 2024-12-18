@@ -1,27 +1,27 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"gopkg.in/yaml.v2"
-	"bufio"
 	"os"
 	"path/filepath"
 	"strings"
 )
 
 type Page struct {
-	Name string
+	Name        string
 	ContentType string
-	Layout string `yaml:"layout"`
-	Title string `yaml:"title"`
-	Permalink string `yaml:"permalink"`
+	Layout      string `yaml:"layout"`
+	Title       string `yaml:"title"`
+	Permalink   string `yaml:"permalink"`
 	Description string `yaml:"description"`
-	Author string `yaml:"author"`
-	AuthorLink string `yaml:"author_link"`
-	Date string `yaml:"date"`
-	Categories string `yaml:"categories"`
-	Body string `yaml:"body"`
-	Url string `yaml:"url"`
+	Author      string `yaml:"author"`
+	AuthorLink  string `yaml:"author_link"`
+	Date        string `yaml:"date"`
+	Categories  string `yaml:"categories"`
+	Body        string `yaml:"body"`
+	Url         string `yaml:"url"`
 }
 
 func (p *Page) SetFromFile(fpath string) error {

@@ -11,18 +11,18 @@ import (
 
 type Website struct {
 	SourcePath string
-	Config *Config
+	Config     *Config
 
-	Pages map[string]*Page
+	Pages     map[string]*Page
 	PageNames []string
 
-	Layouts map[string]*Layout
+	Layouts     map[string]*Layout
 	LayoutNames []string
-	
-	Includes map[string]*Include
+
+	Includes     map[string]*Include
 	IncludeNames []string
 
-	Posts map[string]*Page
+	Posts      map[string]*Page
 	PostsNames []string
 }
 
@@ -100,7 +100,7 @@ func (w *Website) initPages() error {
 		}
 
 		w.PageNames = append(w.PageNames, page.Name)
-		w.Pages[page.Name] = page		
+		w.Pages[page.Name] = page
 	}
 
 	if w.Pages["index"] == nil {
@@ -181,7 +181,6 @@ func (w *Website) initPosts() error {
 
 	return nil
 }
-
 
 func (w *Website) getFilenamesWithExtensionsFromDir(d string) ([]string, error) {
 	p := fmt.Sprintf("%s/%s", w.SourcePath, d)

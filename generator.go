@@ -1,16 +1,16 @@
 package main
 
 import (
-	"os"
+	"errors"
 	"fmt"
-	"strings"
-	"path/filepath"
-	"regexp"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
+	"os"
+	"path/filepath"
 	"reflect"
-	"errors"
+	"regexp"
+	"strings"
 )
 
 type Generator struct {
@@ -59,7 +59,7 @@ func (g *Generator) checkIfDestinationPathEmpty() error {
 		if !strings.HasPrefix(e.Name(), ".") {
 			return fmt.Errorf("Destination path %s is not empty.  It can only contain dot files", g.DestinationPath)
 		}
-	}	
+	}
 
 	return nil
 }
@@ -143,7 +143,7 @@ func (g *Generator) generatePosts(w *Website) error {
 		} else {
 			destPath = append(destPath, "posts")
 		}
-		
+
 		postDir := filepath.Join(destPath...)
 		postDir = filepath.Join(postDir, nameArr[1], nameArr[2], nameArr[3])
 		err = os.MkdirAll(filepath.Join(g.DestinationPath, postDir), 0750)
@@ -161,7 +161,6 @@ func (g *Generator) generatePosts(w *Website) error {
 	}
 	return nil
 }
-
 
 func (g *Generator) getPageHtml(p *Page, w *Website) (string, error) {
 	if w.Layouts[p.Layout] == nil {
@@ -288,8 +287,8 @@ func (g *Generator) replaceOnTree(h string, w *Website, p *Page) (string, error)
 		Type: "root",
 	}
 	tree.SetFromString(h, '{', '}', '%')
-	tree.ProcessRawTags("{%","%}")
-	tree.ProcessForTags("{%","%}", w, g)
+	tree.ProcessRawTags("{%", "%}")
+	tree.ProcessForTags("{%", "%}", w, g)
 
 	pageVars := g.getObjVariablesFromYamlTag(p)
 	tree.ProcessIfTags(g.cachedSiteVariables, pageVars)

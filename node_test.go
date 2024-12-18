@@ -64,7 +64,7 @@ func TestProcessPostVars(t *testing.T) {
 	s := testNode2.GetRaw("{%", "%}")
 	if s != "Post: Title1Description: Description1--Post: Title2--" {
 		t.Fatalf("ProcessPostVars failed to process post values")
-	}	
+	}
 }
 
 func TestGetNodeAttachedValue(t *testing.T) {
@@ -84,28 +84,28 @@ func TestGetNodeAttachedValue(t *testing.T) {
 
 func TestSetFromString(t *testing.T) {
 	n := &Node{}
-	n.SetFromString("" +
-		"TextBlock!" +
-		"{%if page.var1%}" +
-		  "TextVar1!" +
-		  "{%if page.var2%}" +
-		    "TextVar2!" +
-		  "{%endif%}" +
-		  "StillTextVar1!" +
-		"{%endif%}" +
-		"Text!" +
-		"{%raw%}" +
-		  "Raw!" +
-		  "{%if page.var3%}" +
-		    "PageVar3!" +
-		  "{%endif%}" +
-		"{%endraw%}" +
-		"Text2!" +
-		"{%for post in site.posts%}" +
-		  "{%if post.var1%}" +
-		    "PostVar1!" +
-		  "{%endif%}" +
-		"{%endfor%}" +
+	n.SetFromString(""+
+		"TextBlock!"+
+		"{%if page.var1%}"+
+		"TextVar1!"+
+		"{%if page.var2%}"+
+		"TextVar2!"+
+		"{%endif%}"+
+		"StillTextVar1!"+
+		"{%endif%}"+
+		"Text!"+
+		"{%raw%}"+
+		"Raw!"+
+		"{%if page.var3%}"+
+		"PageVar3!"+
+		"{%endif%}"+
+		"{%endraw%}"+
+		"Text2!"+
+		"{%for post in site.posts%}"+
+		"{%if post.var1%}"+
+		"PostVar1!"+
+		"{%endif%}"+
+		"{%endfor%}"+
 		"Text3!", '{', '}', '%')
 
 	if len(n.Children) != 7 ||
@@ -131,9 +131,9 @@ func TestSetFromString(t *testing.T) {
 	}
 
 	if n.Children[3].Children[1].Type != "if" ||
-		n.Children[3].Children[1].Content != "if page.var3" || 
-		len(n.Children[3].Children[1].Children) != 1 || 
-		n.Children[3].Children[1].Children[0].Type != "text" || 
+		n.Children[3].Children[1].Content != "if page.var3" ||
+		len(n.Children[3].Children[1].Children) != 1 ||
+		n.Children[3].Children[1].Children[0].Type != "text" ||
 		n.Children[3].Children[1].Children[0].Content != "PageVar3!" {
 
 		t.Fatalf("SetFromString failed to parse 'raw' tag")
