@@ -21,9 +21,9 @@ jobs:
       - name: Download golang
         shell: bash
         run: |
-          wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz
+          wget https://go.dev/dl/go1.23.4.linux-amd64.tar.gz
           mkdir -p $(pwd)/.bin/golang
-          tar -C $(pwd)/.bin/golang -xzf go1.21.1.linux-amd64.tar.gz
+          tar -C $(pwd)/.bin/golang -xzf go1.23.4.linux-amd64.tar.gz
 
       - name: Run tests
         shell: bash
